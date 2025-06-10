@@ -10,25 +10,25 @@ export type CheapestPrice = {
   price: string;
 };
 
+// * Single Game from games endpoint (based off query)
 export type GameItem = {
   gameID: number,
   external: string,
   thumb: string
 }
 
-type Deal = {
+// * Breakdown of game price per store
+export type Deal = {
   dealID: string,
   price: string,
   retailPrice: string,
   savings: string,
-  storeId: string
+  storeID: string
 }
 
-export type GInfo = {
-  cheapestPriceEver: {
-    date: number
-    price: number,
-  },
+// * Detailed price of game
+export type GameItemDetailed = {
+  cheapestPriceEver: CheapestPrice
   deals: Deal[],
   info: {
     steamAppId: string,

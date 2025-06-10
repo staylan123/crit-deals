@@ -1,10 +1,11 @@
-import { Button, Card, CardBody, ListGroup } from "react-bootstrap";
-import type { GameInfo, GameItem, GInfo } from "../types/types";
+import { Button, Card, ListGroup } from "react-bootstrap";
+import type { GameItem, GameItemDetailed } from "../types/types";
 import { useState } from "react";
+import DealInfo from "./DealInfo";
 
-const GameCard = ({ game }: { game: GameItem }) => {
+const GameCard = ({ game } : { game: GameItem }) => {
   // * Game Item State
-  const [gameInfo, setGameInfo] = useState<GInfo | null>(null);
+  const [gameInfo, setGameInfo] = useState<GameItemDetailed | null>(null);
   const [gameInfoError, setGameInfoError] = useState<Error | null>(null);
   const [gameInfoLoading, setGameInfoLoading] = useState<boolean>(false);
 
@@ -29,7 +30,7 @@ const GameCard = ({ game }: { game: GameItem }) => {
       setGameInfoLoading(false);
     }
   };
-  console.log(gameInfo, "x");
+
   return (
     <Card style={{ maxWidth: "400px" }}>
       <Card.Img variant="top" src={game.thumb} />
@@ -46,7 +47,7 @@ const GameCard = ({ game }: { game: GameItem }) => {
       ) : (
         <ListGroup className="list-group-flush">
           {
-            gameInfo?.deals.map(deal => <p>{deal.price}</p>)
+            gameInfo?.deals.map(deal => <DealInfo deal={deal} key={deal.dealID} />)
           }
         </ListGroup>
       )}

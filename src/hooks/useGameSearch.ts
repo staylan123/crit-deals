@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import type { GameItem } from "../types/types";
 
 const useGameSearch = () => {
-  const [data, setData] = useState<any>([]);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  // * Game List State
+  const [gameList, setGameList] = useState<GameItem[]>([]);
+  const [gameListError, setGameListError] = useState<Error | null>(null);
+  const [gameListLoading, setGameListLoading] = useState<boolean>(false);
 
-  const fetchGameData = async (query: string) => {
-    setLoading(true);
-
+  const fetchGameList = async (query: string) => {
+    setGameListLoading(true);
     try {
       const response = await fetch(
         `https://www.cheapshark.com/api/1.0/games?title=${encodeURIComponent(
@@ -15,22 +16,23 @@ const useGameSearch = () => {
         )}&limit=10`
       );
 
-      if (!response.ok) throw new Error(`An Error has occured: ${response.status}`);
-      const _data = await response.json();
-      setData(_data);
+      if (!response.ok)
+        throw new Error(`An Error has occured: ${response.status}`);
+      const data = await response.json();
+      setGameList(data);
     } catch (error: any) {
       console.error("Failed to fetch games!");
-      setError(error.message);
+      setGameListError(error.message);
     } finally {
-      setLoading(false);
+      setGameListLoading(false);
     }
   };
 
   return {
-    data,
-    error,
-    loading,
-    fetchGameData,
+    gameList,
+    gameListError,
+    gameListLoading,
+    fetchGameList
   };
 };
 

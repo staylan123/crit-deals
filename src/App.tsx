@@ -1,12 +1,15 @@
 import { Navigate, Route, Routes } from "react-router";
 import "./App.css";
 import NavbarComponent from "./components/Navbar";
-import useGameSearch from "./hooks/useGameSearch";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
+import useGameStore from "./hooks/useGameStore";
 
 function App() {
-  const { fetchGameData } = useGameSearch();
+  const { stores, loading, error } = useGameStore()
+
+  if (loading) return <p>Loading App</p>
+  if (error) return <p>Application has failed to load!</p>
 
   return (
     <main>

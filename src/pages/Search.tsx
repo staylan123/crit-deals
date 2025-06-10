@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import useGameSearch from "../hooks/useGameSearch";
+import GameCard from "../components/Card";
 
 const Search = () => {
-  const { fetchGameData, data, loading, error } = useGameSearch();
+  const { fetchGameList, gameList, gameListError, gameListLoading } = useGameSearch();
   const [query, setQuery] = useState<string>("");
-    console.log(data)
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!query.length) return;
-    if (e.key === "Enter") fetchGameData(query);
+    if (e.key === "Enter") fetchGameList(query);
   };
 
   return (
@@ -23,15 +24,21 @@ const Search = () => {
         onKeyDown={handleKeyDown}
       />
       <Container>
-        {
-            loading ? <p className="text-white">loading...</p> :
-            error ? <p className="text-white">ERROR</p> :
-            <div>
-                {
-                    data.map((game : any) => <p>{game.external}</p>)
-                }
-            </div>
-        }
+        {gameListLoading ? (
+          <p className="text-white">loading...</p>
+        ) : gameListError ? (
+          <p className="text-white">ERROR</p>
+        ) : (
+          <Container fluid="md">
+            <Row>
+                {gameList.map((game) => (
+                  <Col key={game.gameID} xs={12} sm={6} md={4} lg={3}>
+                    <GameCard game={game} />
+                  </Col>
+                ))}
+            </Row>
+          </Container>
+        )}
       </Container>
     </Container>
   );

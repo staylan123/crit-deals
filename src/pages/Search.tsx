@@ -23,7 +23,7 @@ const Search = () => {
   }, [_query])
 
   return (
-    <Container>
+    <Container className="mt-2">
       <h1 className="text-white">Search</h1>
       <input
         className="px-4 py-2 rounded w-100"
@@ -34,7 +34,7 @@ const Search = () => {
         onKeyDown={handleKeyDown}
         value={query}
       />
-      <Container>
+      <div>
         {gameListLoading ? (
           <Loader />
         ) : gameListError ? (
@@ -50,7 +50,7 @@ const Search = () => {
             </Row>
           </Container>
         )}
-      </Container>
+      </div>
     </Container>
   );
 };

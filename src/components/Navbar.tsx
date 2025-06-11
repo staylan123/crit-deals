@@ -6,7 +6,7 @@ const NavbarComponent = () => {
     <Navbar expand="lg" bg="dark" variant="dark">
       <Container>
         <Navbar.Brand
-          href="#home"
+          href="/"
           className="d-flex align-items-center gap-2 brand-color"
         >
           <IoGameController size={24} />

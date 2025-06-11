@@ -17,7 +17,7 @@ function App() {
       <NavbarComponent />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/search" element={<Search />} />
+        <Route path="/search/:query?" element={<Search />} />
         <Route path="/games/:gameID" element={<GamePage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

@@ -15,7 +15,7 @@ const GameCard = ({
     <Card style={{ maxWidth: "400px" }} className="bg-dark text-white">
       <Card.Img variant="top" src={game.thumb} className="card-img-fixed"/>
       <Card.Body>
-        <Card.Title>{game.external}</Card.Title>
+        <Card.Title className="fs-6 fw-bold">{game.external}</Card.Title>
         <Card.Body className="p-0 mb-2">As low as ${game.cheapest}</Card.Body>
         <Button
           className="bg-brand border-success"

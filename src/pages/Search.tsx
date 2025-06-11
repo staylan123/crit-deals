@@ -1,18 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import useGameSearch from "../hooks/useGameSearch";
 import GameCard from "../components/Card";
 import Loader from "../components/Loader";
 import GameSearchFailed from "../components/GameSearchFailed";
+import { useNavigate, useParams } from "react-router";
 
 const Search = () => {
+  const { query: _query } = useParams() // * Taken from URL
+  const navigate = useNavigate()
   const { fetchGameList, gameList, gameListError, gameListLoading } = useGameSearch();
-  const [query, setQuery] = useState<string>("");
+  const [query, setQuery] = useState<string>(decodeURIComponent(_query || ""));
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!query.length) return;
-    if (e.key === "Enter") fetchGameList(query);
+    if (!query.trim().length) return;
+    if (e.key === "Enter") navigate(`/search/${encodeURIComponent(query)}`);
   };
+
+  useEffect(() => {
+    if (!_query) return // * Prevent pre-fetch
+    fetchGameList(query.trim())
+  }, [_query])
 
   return (
     <Container>
@@ -24,6 +32,7 @@ const Search = () => {
         placeholder="Enter Game Name"
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={handleKeyDown}
+        value={query}
       />
       <Container>
         {gameListLoading ? (

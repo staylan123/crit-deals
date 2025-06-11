@@ -5,18 +5,11 @@ import GameCard from "../components/Card";
 import useFetchGame from "../hooks/useFetchGame";
 
 const Search = () => {
-  const { fetchGameList, gameList, gameListError, gameListLoading } =
-    useGameSearch();
+  const { fetchGameList, gameList, gameListError, gameListLoading } = useGameSearch();
   const [query, setQuery] = useState<string>("");
-  const [selectedGameId, setSelectedGameId] = useState<number | null>(null);
-  const { gameInfo, gameInfoError, gameInfoLoading } = useFetchGame({
-    selectedGameId,
-  });
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!query.length) return;
-
-    setSelectedGameId(null); // * Reset state
     if (e.key === "Enter") fetchGameList(query);
   };
 
@@ -41,14 +34,7 @@ const Search = () => {
             <Row>
               {gameList.map((game) => (
                 <Col key={game.gameID} xs={12} sm={6} md={4} lg={3}>
-                  <GameCard
-                    game={game}
-                    selectedGameId={selectedGameId}
-                    gameInfo={gameInfo}
-                    gameInfoError={gameInfoError}
-                    gameInfoLoading={gameInfoLoading}
-                    setSelectedGameId={setSelectedGameId}
-                  />
+                  <GameCard game={game} />
                 </Col>
               ))}
             </Row>

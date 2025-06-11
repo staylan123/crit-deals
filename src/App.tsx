@@ -4,6 +4,7 @@ import NavbarComponent from "./components/Navbar";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import { useStoresContext } from "./context/useStoresContext";
+import GamePage from "./pages/GamePage";
 
 function App() {
   const {loading, error} = useStoresContext()
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/games/:gameID" element={<GamePage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </main>

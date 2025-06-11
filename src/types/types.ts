@@ -12,6 +12,7 @@ export type CheapestPrice = {
 
 // * Single Game from games endpoint (based off query)
 export type GameItem = {
+  cheapest: number,
   gameID: number,
   external: string,
   thumb: string

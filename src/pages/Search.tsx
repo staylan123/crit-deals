@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import useGameSearch from "../hooks/useGameSearch";
 import GameCard from "../components/Card";
-import useFetchGame from "../hooks/useFetchGame";
+import Loader from "../components/Loader";
+import GameSearchFailed from "../components/GameSearchFailed";
 
 const Search = () => {
   const { fetchGameList, gameList, gameListError, gameListLoading } = useGameSearch();
@@ -26,12 +27,12 @@ const Search = () => {
       />
       <Container>
         {gameListLoading ? (
-          <p className="text-white">loading...</p>
+          <Loader />
         ) : gameListError ? (
-          <p className="text-white">ERROR</p>
+          <GameSearchFailed />
         ) : (
-          <Container fluid="md">
-            <Row>
+          <Container fluid="md" className="my-4">
+            <Row className="gy-4">
               {gameList.map((game) => (
                 <Col key={game.gameID} xs={12} sm={6} md={4} lg={3}>
                   <GameCard game={game} />

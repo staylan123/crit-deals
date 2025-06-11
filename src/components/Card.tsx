@@ -23,7 +23,7 @@ const GameCard = ({
   console.log(game.gameID === selectedGameId);
   return (
     <Card style={{ maxWidth: "400px" }}>
-      <Card.Img variant="top" src={game.thumb} />
+      <Card.Img variant="top" src={game.thumb} className="card-img-fixed"/>
       <Card.Body>
         <Card.Title>{game.external}</Card.Title>
         <Button

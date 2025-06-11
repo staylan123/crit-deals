@@ -13,7 +13,7 @@ const useGameSearch = () => {
       const response = await fetch(
         `https://www.cheapshark.com/api/1.0/games?title=${encodeURIComponent(
           query
-        )}&limit=10`
+        )}&limit=16`
       );
 
       if (!response.ok)

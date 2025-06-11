@@ -1,12 +1,17 @@
 import type { Deal } from "../types/types";
 import { useStoresContext } from "../context/useStoresContext";
 import { Container } from "react-bootstrap";
+import { BiLinkExternal } from "react-icons/bi";
 
 const DealInfo = ({ deal }: { deal: Deal }) => {
   const { stores } = useStoresContext();
-  console.log(deal);
   const storeInfo = stores.find((store) => store.storeID === deal.storeID);
   const discountAsNumber = Number(deal.savings) || 0;
+
+  const handleBuy = () => {
+    const url = `https://www.cheapshark.com/redirect?dealID=${(deal.dealID)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }
 
   return (
     <Container className="p-3 d-flex gap-4 align-items-center rounded" style={{background: '#454545'}}>
@@ -29,6 +34,7 @@ const DealInfo = ({ deal }: { deal: Deal }) => {
           </span>
         )}
       </div>
+      <button onClick={handleBuy} className="bg-brand text-white rounded py-2 px-4 fw-bold"><BiLinkExternal /> Buy Now</button>
     </Container>
   );
 };

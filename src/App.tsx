@@ -3,15 +3,9 @@ import "./App.css";
 import NavbarComponent from "./components/Navbar";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
-import { useStoresContext } from "./context/useStoresContext";
 import GamePage from "./pages/GamePage";
 
 function App() {
-  const {loading, error} = useStoresContext()
-
-  if (loading) return <p>Loading App</p>
-  if (error) return <p>Application has failed to load!</p>
-
   return (
     <main>
       <NavbarComponent />

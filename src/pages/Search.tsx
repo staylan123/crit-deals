@@ -30,6 +30,7 @@ const Search = () => {
         <FaSearch size={28} />
         <h2 className="m-0">Search</h2>
       </div>
+      <p className="text-white">Can't find your game? Try to be as specific as possible with the name</p>
       <input
         className="px-4 py-2 rounded w-100"
         style={{ maxWidth: "800px" }}

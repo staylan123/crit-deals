@@ -6,10 +6,13 @@ import Search from "./pages/Search";
 import GamePage from "./pages/GamePage";
 import Footer from "./components/Footer";
 import { StoresContextProvider } from "./context/useStoresContext";
+import About from "./pages/About";
 
 function App() {
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div
+      style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
+    >
       <BrowserRouter>
         <StoresContextProvider>
           <NavbarComponent />
@@ -18,6 +21,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/search/:query?" element={<Search />} />
               <Route path="/games/:gameID" element={<GamePage />} />
+              <Route path="/about" element={<About />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </main>
